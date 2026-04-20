@@ -3,7 +3,11 @@
 AI 201 — Project 2: The Reactive Sandbox
 A weekly meal planner + cooking diary for solo-living young adults.
 
-## Run it
+🔗 **Live demo**: https://chanhwi-keyoh.github.io/Cookit-/
+📓 **AI Direction Log**: [docs/ai-direction-log.md](docs/ai-direction-log.md)
+✋ **Records of Resistance**: [docs/records-of-resistance.md](docs/records-of-resistance.md)
+
+## Run it locally
 
 ```bash
 npm install
