@@ -118,3 +118,57 @@ This was another "no state added" change. The Browser already knew each
 recipe's name through props; it just started rendering an `<img>` next to
 the name. The Detail View did the same. The wire diagram from Entry 2 is
 unchanged.
+
+---
+
+## Entry 7 — Rebalancing recipe costs by eye, not by formula
+
+The seed data I had Claude write set per-serving costs between $1.00 and
+$5.00. Scanning the Browser after deploy, the numbers felt wrong —
+Cream Risotto at $5.00, Chicken Salad at $4.50, Avocado Toast at $3.00.
+That's 2015 pricing, not 2026.
+
+I gave Claude two options:
+1. Write a unit-price table (rice $X/bowl, chicken breast $Y/g …), multiply
+   through every recipe, and recompute.
+2. Just hand-adjust each of the 30 costs based on what I'd actually pay.
+
+I went with option 2. The assignment doesn't care *how* the numbers were
+derived — it cares that they're plausible and that the derived
+`weeklyBudget` reacts correctly when I assign meals. A unit-price table
+would have been a fake precision: grocery prices vary by region, store,
+and week, and I can't hand-verify a $/g value Claude invented for "thinly
+sliced beef." Hand-adjusting took five minutes, is transparent, and the
+number I put in is the number I stand behind.
+
+I also shifted the Max Cost filter tiers from `Under $3 / Under $5` to
+`Under $4 / Under $6`. With the new range, `Under $5` would have been
+"almost everything" — which is a filter that doesn't filter.
+
+The state architecture didn't move. This was a data-only change, exactly
+like Entry 5 (adding 20 recipes). Another small proof that the schema
+from day one holds up.
+
+---
+
+## Entry 8 — Renaming "Grocery List" after playtest feedback
+
+A classmate playtesting the app asked me: "Is this the list for the
+recipe I'm looking at?" It was not. It's the merged list across every
+meal assigned to the week — the thing you'd actually take shopping.
+
+Two fixes were possible:
+1. Move the list into `DetailView` as a per-recipe ingredient roll-up.
+2. Leave the list where it is (Controller, weekly scope) and fix the
+   label so the scope is visible.
+
+The per-recipe list already exists — it's the Ingredients section in
+DetailView. Splitting "grocery" into two lists in two places would be a
+worse UX and would also tempt a second state flow I don't need. So I
+kept the architecture and changed the copy: `Grocery List` →
+`Weekly Grocery List`.
+
+The lesson I wanted to log: when a tester is confused, the first thing
+to check is whether the label is lying about scope. Changing the label
+was one Edit call. Splitting the component would have been a rewrite. I
+had to stop myself from going straight for the rewrite.
