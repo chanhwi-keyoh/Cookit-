@@ -175,7 +175,7 @@ export default function Controller({
 
       {/* ── Grocery List ─────────────────────────────────────────────── */}
       <section className="ctrl-section">
-        <h2 className="ctrl-title">Grocery List</h2>
+        <h2 className="ctrl-title">Weekly Grocery List</h2>
         {groceryList.length === 0 ? (
           <p className="ctrl-hint">
             <em>Assign meals to the week and the list fills itself.</em>
