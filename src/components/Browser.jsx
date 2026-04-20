@@ -1,5 +1,9 @@
 import './Browser.css';
 
+function recipeImageUrl(name) {
+  return `${import.meta.env.BASE_URL}images/recipes/${encodeURIComponent(name)}.png`;
+}
+
 const DIFFICULTY_ICON = {
   beginner: '○',
   intermediate: '◐',
@@ -45,6 +49,14 @@ export default function Browser({
                 }
                 onClick={() => onSelectRecipe(r.id)}
               >
+                <div className="browser__thumb">
+                  <img
+                    src={recipeImageUrl(r.name)}
+                    alt=""
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
+                  />
+                </div>
                 <div className="browser__card-top">
                   <span className="browser__name">{r.name}</span>
                   <span

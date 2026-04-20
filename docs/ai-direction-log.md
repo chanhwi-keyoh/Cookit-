@@ -83,3 +83,38 @@ new UI. Just data. The app absorbed the 20 new records with zero
 architectural change — which I took as a quiet proof that the state shape I
 defined up front was the right one. If adding data forces changes to
 components, the data model is wrong.
+
+---
+
+## Entry 6 — Adding recipe images without touching state
+
+I generated 30 PNGs (one per recipe) and dropped them in a `png/` folder,
+filenames matching recipe names exactly. I asked Claude to wire them into
+the Browser (as thumbnails) and the DetailView (as a hero image), and to
+let the build/deploy handle them cleanly on GitHub Pages.
+
+Two decisions I made that Claude would not have made by default:
+
+1. **No `image` field on each recipe.** Since the filenames already match
+   recipe names, I told Claude to derive the image URL from `recipe.name`
+   at render time, not add a new field to every recipe in `recipes.js`.
+   The data model stays exactly as it was — 30 recipes, zero schema
+   change. If I ever rename a recipe, I rename its PNG; there's no third
+   place to update.
+
+2. **`public/images/recipes/` + `import.meta.env.BASE_URL`**, not Vite's
+   glob import. Claude's first instinct for bundled assets in a React app
+   is `import.meta.glob`, which would have hashed the filenames and
+   embedded them in the bundle. That's more "idiomatic" but hides the
+   images behind generated URLs. Putting them in `public/` keeps the
+   filenames readable on the deployed site — useful when I'm debugging a
+   404 in DevTools, and necessary anyway because the repo is served under
+   a subpath (`/Cookit-/`) on GitHub Pages.
+
+Images fail silently: both components have an `onError` handler that hides
+the broken-image placeholder. No red boxes if a PNG is missing.
+
+This was another "no state added" change. The Browser already knew each
+recipe's name through props; it just started rendering an `<img>` next to
+the name. The Detail View did the same. The wire diagram from Entry 2 is
+unchanged.

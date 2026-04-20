@@ -1,5 +1,9 @@
 import './DetailView.css';
 
+function recipeImageUrl(name) {
+  return `${import.meta.env.BASE_URL}images/recipes/${encodeURIComponent(name)}.png`;
+}
+
 const DIFFICULTY_LABEL = {
   beginner: 'Beginner',
   intermediate: 'Intermediate',
@@ -39,6 +43,15 @@ export default function DetailView({ recipe }) {
 
   return (
     <article className="detail">
+      {/* ── Hero image ───────────────────────────────────────────────── */}
+      <figure className="detail__hero">
+        <img
+          src={recipeImageUrl(recipe.name)}
+          alt={recipe.name}
+          onError={(e) => { e.currentTarget.parentElement.style.display = 'none'; }}
+        />
+      </figure>
+
       {/* ── Top: Recipe Info ─────────────────────────────────────────── */}
       <header className="detail__header">
         <div className="detail__heading">
