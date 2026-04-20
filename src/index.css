@@ -1,0 +1,42 @@
+:root {
+  /* Palette — "My Recipe Notebook" */
+  --bg: #FFF8F0;
+  --primary: #C4743A;
+  --primary-dark: #8B5E3C;
+  --mustard: #D4A537;
+  --olive: #7A8B5E;
+  --salmon: #E8967A;
+  --ink: #3D2B1F;
+  --ink-soft: #6B5344;
+  --paper: #FFFDF7;
+  --line: #E8DDC9;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 8px rgba(61, 43, 31, 0.08);
+  --shadow-md: 0 4px 14px rgba(61, 43, 31, 0.12);
+
+  --font-body: 'Pretendard', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --font-display: 'Gowun Batang', 'Georgia', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
