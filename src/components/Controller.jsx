@@ -186,7 +186,12 @@ export default function Controller({
               <li key={i}>
                 <span>{g.name}</span>
                 <span className="grocery__qty">
-                  {Number.isInteger(g.qty) ? g.qty : g.qty.toFixed(2)} {g.unit}
+                  {g.amounts
+                    .map(
+                      ({ qty, unit }) =>
+                        `${Number.isInteger(qty) ? qty : qty.toFixed(2)} ${unit}`
+                    )
+                    .join(' + ')}
                 </span>
               </li>
             ))}

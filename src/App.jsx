@@ -39,8 +39,11 @@ function sumAssignedCosts(mealPlan, recipes) {
 }
 
 function mergeIngredients(mealPlan, recipes) {
-  // key = `${name}::${unit}` so qty sums only make sense when units match
-  const acc = new Map();
+  // Group by ingredient name (case/whitespace-insensitive). Within each
+  // group, sum quantities per unit. Mixed units stay separate line items
+  // *inside* the same ingredient row — e.g. "Sugar: 2 tbsp + 2 tsp" —
+  // so we never fake a unit conversion we can't guarantee.
+  const byName = new Map(); // nameKey -> { displayName, units: Map<unit, qty> }
   for (const day of DAYS) {
     for (const slot of SLOTS) {
       const id = mealPlan[day][slot];
@@ -48,17 +51,27 @@ function mergeIngredients(mealPlan, recipes) {
       const r = recipes.find((x) => x.id === id);
       if (!r) continue;
       for (const ing of r.ingredients) {
-        const key = `${ing.name}::${ing.unit}`;
-        const prev = acc.get(key);
-        if (prev) {
-          acc.set(key, { ...prev, qty: prev.qty + ing.qty });
-        } else {
-          acc.set(key, { ...ing });
+        const nameKey = ing.name.trim().toLowerCase();
+        if (!byName.has(nameKey)) {
+          byName.set(nameKey, {
+            displayName: ing.name.trim(),
+            units: new Map(),
+          });
         }
+        const entry = byName.get(nameKey);
+        entry.units.set(ing.unit, (entry.units.get(ing.unit) ?? 0) + ing.qty);
       }
     }
   }
-  return Array.from(acc.values()).sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(byName.values())
+    .sort((a, b) => a.displayName.localeCompare(b.displayName))
+    .map((entry) => ({
+      name: entry.displayName,
+      amounts: Array.from(entry.units.entries()).map(([unit, qty]) => ({
+        unit,
+        qty,
+      })),
+    }));
 }
 
 function todayISO() {

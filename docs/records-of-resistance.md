@@ -1,6 +1,6 @@
 # Records of Resistance — "Cooked It!"
 
-Three moments where I rejected or significantly revised what Claude produced.
+Four moments where I rejected or significantly revised what Claude produced.
 The course calls these "opportunities, not mistakes." Documenting them honestly.
 
 ---
@@ -78,3 +78,51 @@ palette, washi-tape diary accent, rounded cards, and notebook-paper lines
 were decisions about *presentation*, not *function*. If I'd styled first,
 every design decision would have been contaminated by "does this still
 work?" anxiety.
+
+---
+
+## Resistance 4 — Making the Grocery List actually merge
+
+**What Claude shipped:** The first version of `mergeIngredients` keyed each
+line by `` `${name}::${unit}` ``. If I assigned two recipes that both used
+sugar — one calling for 2 tbsp, the other for 2 tsp — the grocery list
+rendered two separate rows:
+
+```
+Sugar    2 tbsp
+Sugar    2 tsp
+```
+
+Technically correct, because tbsp ≠ tsp. Practically useless: the whole point
+of a grocery list is "how much of X do I need to buy," and "X" for the
+shopper is *sugar*, not *sugar-in-tablespoons* and *sugar-in-teaspoons*.
+
+**Why I rejected it:** The merge was too conservative. It let the data model
+(where unit is a peer of name) drive the UX, when the UX should drive how
+data is grouped for display. A reasonable shopper reads "Sugar" as one line
+and figures out the scoops themselves — they don't want to scan the list
+twice for the same ingredient.
+
+**Why I also rejected the tempting overreach:** my first instinct was to
+have Claude write a unit-conversion table (1 tbsp = 3 tsp, etc.) and sum
+everything into a single quantity. I talked myself out of it. Unit
+conversion is a whole can of worms — volumes vs. weights, ingredient
+density, locale (US tbsp ≠ metric tbsp). A wrong conversion in a cooking
+app is worse than no conversion. I don't trust an AI-generated conversion
+table I can't hand-verify, and this project isn't the place to fight that
+fight.
+
+**What I did instead:** Group by ingredient *name* (case- and
+whitespace-normalized), but within each group keep the units as separate
+sub-amounts joined by `+`:
+
+```
+Sugar    2 tbsp + 2 tsp
+```
+
+One row per ingredient, mixed units preserved verbatim. No fake conversions,
+no duplicated rows. In `App.jsx`, `mergeIngredients` now returns
+`{ name, amounts: [{ qty, unit }] }` instead of flat `{ name, qty, unit }`,
+and `Controller.jsx` joins the amounts with `" + "` at render time. The
+state architecture didn't change — this was a fix in the pure-derived-value
+layer, which is exactly where display concerns belong.
