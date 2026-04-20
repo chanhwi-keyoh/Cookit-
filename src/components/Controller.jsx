@@ -90,8 +90,8 @@ export default function Controller({
             }
           >
             <option value="all">Any</option>
-            <option value={3}>Under $3</option>
-            <option value={5}>Under $5</option>
+            <option value={4}>Under $4</option>
+            <option value={6}>Under $6</option>
           </select>
         </div>
 

@@ -7,7 +7,7 @@ export const initialRecipes = [
     name: 'Egg Fried Rice',
     time: 15,
     difficulty: 'beginner',
-    cost: 2.5,
+    cost: 3.5,
     servings: 1,
     ingredients: [
       { name: 'Cooked rice', qty: 1, unit: 'bowl' },
@@ -44,7 +44,7 @@ export const initialRecipes = [
     name: 'Tuna Mayo Rice Bowl',
     time: 10,
     difficulty: 'beginner',
-    cost: 3.0,
+    cost: 4.0,
     servings: 1,
     ingredients: [
       { name: 'Cooked rice', qty: 1, unit: 'bowl' },
@@ -69,7 +69,7 @@ export const initialRecipes = [
     name: 'Kimchi Jjigae (Single Serve)',
     time: 20,
     difficulty: 'intermediate',
-    cost: 3.5,
+    cost: 5.0,
     servings: 1,
     ingredients: [
       { name: 'Aged kimchi', qty: 1, unit: 'cup' },
@@ -96,7 +96,7 @@ export const initialRecipes = [
     name: 'One-Pan Pasta',
     time: 20,
     difficulty: 'intermediate',
-    cost: 4.0,
+    cost: 5.0,
     servings: 1,
     ingredients: [
       { name: 'Spaghetti', qty: 100, unit: 'g' },
@@ -123,7 +123,7 @@ export const initialRecipes = [
     name: 'Toast + Scrambled Eggs',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.0,
+    cost: 3.0,
     servings: 1,
     ingredients: [
       { name: 'Bread', qty: 2, unit: 'slice' },
@@ -148,7 +148,7 @@ export const initialRecipes = [
     name: 'Bean Sprout Soup Rice',
     time: 25,
     difficulty: 'intermediate',
-    cost: 2.5,
+    cost: 3.5,
     servings: 1,
     ingredients: [
       { name: 'Bean sprouts', qty: 1, unit: 'cup' },
@@ -175,7 +175,7 @@ export const initialRecipes = [
     name: 'Soy Sauce Egg Rice',
     time: 5,
     difficulty: 'beginner',
-    cost: 1.5,
+    cost: 2.5,
     servings: 1,
     ingredients: [
       { name: 'Cooked rice', qty: 1, unit: 'bowl' },
@@ -201,7 +201,7 @@ export const initialRecipes = [
     name: 'Chicken Breast Salad',
     time: 15,
     difficulty: 'intermediate',
-    cost: 4.5,
+    cost: 6.0,
     servings: 1,
     ingredients: [
       { name: 'Chicken breast', qty: 1, unit: 'pcs' },
@@ -229,7 +229,7 @@ export const initialRecipes = [
     name: 'Tteokbokki (Single Serve)',
     time: 20,
     difficulty: 'intermediate',
-    cost: 3.0,
+    cost: 4.0,
     servings: 1,
     ingredients: [
       { name: 'Rice cakes', qty: 150, unit: 'g' },
@@ -258,7 +258,7 @@ export const initialRecipes = [
     name: 'Cream Risotto',
     time: 30,
     difficulty: 'ambitious',
-    cost: 5.0,
+    cost: 7.0,
     servings: 1,
     ingredients: [
       { name: 'Arborio rice', qty: 0.5, unit: 'cup' },
@@ -288,7 +288,7 @@ export const initialRecipes = [
     name: 'Gyudon (Beef Bowl)',
     time: 15,
     difficulty: 'intermediate',
-    cost: 4.5,
+    cost: 6.0,
     servings: 1,
     ingredients: [
       { name: 'Thinly sliced beef', qty: 100, unit: 'g' },
@@ -319,7 +319,7 @@ export const initialRecipes = [
     name: 'Tamago Kake Gohan',
     time: 3,
     difficulty: 'beginner',
-    cost: 1.0,
+    cost: 2.0,
     servings: 1,
     ingredients: [
       { name: 'Hot cooked rice', qty: 1, unit: 'bowl' },
@@ -344,7 +344,7 @@ export const initialRecipes = [
     name: 'Yakisoba',
     time: 15,
     difficulty: 'beginner',
-    cost: 3.0,
+    cost: 4.5,
     servings: 1,
     ingredients: [
       { name: 'Yakisoba noodles', qty: 1, unit: 'pack' },
@@ -374,7 +374,7 @@ export const initialRecipes = [
     name: 'Miso Soup + Rice',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.0,
+    cost: 3.0,
     servings: 1,
     ingredients: [
       { name: 'Water', qty: 1.5, unit: 'cup' },
@@ -402,7 +402,7 @@ export const initialRecipes = [
     name: 'Mapo Tofu (Single Serve)',
     time: 20,
     difficulty: 'intermediate',
-    cost: 3.0,
+    cost: 4.5,
     servings: 1,
     ingredients: [
       { name: 'Soft tofu', qty: 150, unit: 'g' },
@@ -435,7 +435,7 @@ export const initialRecipes = [
     name: 'Coconut Curry Ramen',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.5,
+    cost: 3.5,
     servings: 1,
     ingredients: [
       { name: 'Instant ramen noodles', qty: 1, unit: 'pack' },
@@ -464,7 +464,7 @@ export const initialRecipes = [
     name: 'Pad Thai (Simplified)',
     time: 20,
     difficulty: 'intermediate',
-    cost: 4.0,
+    cost: 6.0,
     servings: 1,
     ingredients: [
       { name: 'Rice noodles', qty: 100, unit: 'g' },
@@ -498,7 +498,7 @@ export const initialRecipes = [
     name: 'Fried Rice with Spam',
     time: 15,
     difficulty: 'beginner',
-    cost: 3.0,
+    cost: 4.0,
     servings: 1,
     ingredients: [
       { name: 'Cooked rice', qty: 1, unit: 'bowl' },
@@ -528,7 +528,7 @@ export const initialRecipes = [
     name: 'Quesadilla',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.5,
+    cost: 3.5,
     servings: 1,
     ingredients: [
       { name: 'Flour tortilla', qty: 1, unit: 'pcs' },
@@ -555,7 +555,7 @@ export const initialRecipes = [
     name: 'Burrito Bowl',
     time: 15,
     difficulty: 'beginner',
-    cost: 4.0,
+    cost: 5.5,
     servings: 1,
     ingredients: [
       { name: 'Cooked rice', qty: 1, unit: 'bowl' },
@@ -586,7 +586,7 @@ export const initialRecipes = [
     name: 'Black Bean Tacos',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.5,
+    cost: 3.5,
     servings: 1,
     ingredients: [
       { name: 'Small flour tortillas', qty: 2, unit: 'pcs' },
@@ -615,7 +615,7 @@ export const initialRecipes = [
     name: 'Aglio e Olio',
     time: 15,
     difficulty: 'intermediate',
-    cost: 2.5,
+    cost: 3.5,
     servings: 1,
     ingredients: [
       { name: 'Spaghetti', qty: 100, unit: 'g' },
@@ -645,7 +645,7 @@ export const initialRecipes = [
     name: 'Carbonara (Single Serve)',
     time: 20,
     difficulty: 'ambitious',
-    cost: 4.0,
+    cost: 5.5,
     servings: 1,
     ingredients: [
       { name: 'Spaghetti', qty: 100, unit: 'g' },
@@ -675,7 +675,7 @@ export const initialRecipes = [
     name: 'Grilled Cheese + Tomato Soup',
     time: 15,
     difficulty: 'beginner',
-    cost: 3.0,
+    cost: 4.0,
     servings: 1,
     ingredients: [
       { name: 'Bread', qty: 2, unit: 'slice' },
@@ -701,7 +701,7 @@ export const initialRecipes = [
     name: 'Shakshuka (Eggs in Tomato)',
     time: 20,
     difficulty: 'intermediate',
-    cost: 3.5,
+    cost: 4.5,
     servings: 1,
     ingredients: [
       { name: 'Canned diced tomatoes', qty: 0.5, unit: 'can' },
@@ -734,7 +734,7 @@ export const initialRecipes = [
     name: 'French Toast',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.0,
+    cost: 3.0,
     servings: 1,
     ingredients: [
       { name: 'Bread', qty: 2, unit: 'slice' },
@@ -762,7 +762,7 @@ export const initialRecipes = [
     name: 'Ramen Upgrade (Loaded Instant)',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.0,
+    cost: 3.0,
     servings: 1,
     ingredients: [
       { name: 'Instant ramen', qty: 1, unit: 'pack' },
@@ -790,7 +790,7 @@ export const initialRecipes = [
     name: 'Chicken Breast Stir-Fry',
     time: 20,
     difficulty: 'intermediate',
-    cost: 4.0,
+    cost: 5.5,
     servings: 1,
     ingredients: [
       { name: 'Chicken breast', qty: 120, unit: 'g' },
@@ -822,7 +822,7 @@ export const initialRecipes = [
     name: 'Avocado Toast + Fried Egg',
     time: 5,
     difficulty: 'beginner',
-    cost: 3.0,
+    cost: 4.5,
     servings: 1,
     ingredients: [
       { name: 'Bread', qty: 1, unit: 'slice' },
@@ -852,7 +852,7 @@ export const initialRecipes = [
     name: 'Kimchi Fried Rice',
     time: 10,
     difficulty: 'beginner',
-    cost: 2.0,
+    cost: 3.0,
     servings: 1,
     ingredients: [
       { name: 'Cooked rice', qty: 1, unit: 'bowl' },
