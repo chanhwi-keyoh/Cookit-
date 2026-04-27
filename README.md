@@ -17,41 +17,82 @@ npm run dev
 
 Open http://localhost:5173.
 
-## Architecture — the only diagram you need
+## Architecture
 
-```
-                   ┌────────────────────────┐
-                   │        App.jsx         │
-                   │  (single source of     │
-                   │   truth for all state) │
-                   │                        │
-                   │  recipes               │
-                   │  selectedRecipeId      │
-                   │  mealPlan              │
-                   │  filters               │
-                   └──────┬──────┬──────┬───┘
-           props down     │      │      │      events up
-    ┌──────────────────┬──┘      │      └──┬──────────────────┐
-    ▼                             ▼         ▼
-┌─────────┐             ┌──────────────┐  ┌──────────────┐
-│ Browser │             │  DetailView  │  │  Controller  │
-│ (left)  │             │   (center)   │  │   (right)    │
-│ reads   │             │ reads only — │  │ reads & writes│
-│ writes  │             │ pure view    │  │               │
-│ select  │             │              │  │ filter,       │
-└─────────┘             └──────────────┘  │ assignMeal,   │
-                                          │ cookedIt      │
-                                          └──────────────┘
+State lives in **one place** — `App.jsx`. The three panels are presentational: they receive data as props (solid lines) and send change requests up as callbacks (dashed lines).
+
+```mermaid
+flowchart TB
+    subgraph APP["App.jsx · Single Source of Truth"]
+        direction TB
+        S["State (useState)<br/>― recipes<br/>― selectedRecipeId<br/>― mealPlan<br/>― filters"]
+        D["Derived each render<br/>― filteredRecipes<br/>― selectedRecipe<br/>― weeklyBudget<br/>― groceryList"]
+        S --> D
+    end
+
+    B["Browser<br/>(left panel)<br/>reads + writes"]
+    V["DetailView<br/>(center panel)<br/>read-only"]
+    C["Controller<br/>(right panel)<br/>reads + writes"]
+
+    APP ==>|"props ↓<br/>filteredRecipes,<br/>selectedRecipeId"| B
+    APP ==>|"props ↓<br/>selectedRecipe"| V
+    APP ==>|"props ↓<br/>filters, mealPlan,<br/>weeklyBudget,<br/>groceryList, …"| C
+
+    B -.->|"onSelectRecipe(id)"| APP
+    C -.->|"onFilterChange<br/>onAssignMeal<br/>onRemoveMeal<br/>onCookedIt"| APP
 ```
 
-Every piece of persistent data lives in exactly one `useState` call in [src/App.jsx](src/App.jsx). No child component holds its own copy of `selectedRecipeId`, `recipes`, `mealPlan`, or `filters`. Derived values (`filteredRecipes`, `selectedRecipe`, `weeklyBudget`, `groceryList`) are computed each render, not stored.
+No child component holds its own copy of `selectedRecipeId`, `recipes`, `mealPlan`, or `filters`. Derived values are recomputed each render — never stored. See [src/App.jsx](src/App.jsx) for the four `useState` calls and the derivation logic.
 
-## The 4 state flows the course asks about
+## What triggers updates — the 4 state flows
 
-1. **Browser click → Detail updates** — clicking a card sets `selectedRecipeId`; Detail View reads the matching recipe from the shared `recipes` array.
-2. **Filter change → Browser shrinks** — Controller writes `filters`; Browser receives `filteredRecipes` (derived) as a prop and re-renders.
-3. **Assign meal → Budget + Grocery recalculate** — Controller writes to `mealPlan`; `weeklyBudget` and `groceryList` are recomputed from `mealPlan` + `recipes` each render.
-4. **"Cooked It!" → diary entry + timesCooked +1** — Controller calls `onCookedIt(note, mood)`; App immutably updates the selected recipe's `cookingLog` and `timesCooked`; Detail View reflects the new entry, Browser card shows new count.
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as User
+    participant B as Browser
+    participant A as App.jsx (state)
+    participant V as DetailView
+    participant C as Controller
+
+    rect rgb(255, 248, 240)
+    Note over U,C: Flow 1 — Browser click → Detail updates
+    U->>B: click recipe card
+    B->>A: onSelectRecipe(id)
+    A-->>V: re-render with new selectedRecipe
+    end
+
+    rect rgb(255, 243, 224)
+    Note over U,C: Flow 2 — Filter change → Browser shrinks
+    U->>C: change filter dropdown
+    C->>A: onFilterChange(key, value)
+    A-->>B: re-render with filteredRecipes (derived)
+    end
+
+    rect rgb(255, 248, 240)
+    Note over U,C: Flow 3 — Assign meal → Budget + Grocery recalculate
+    U->>C: click "+ Assign"
+    C->>A: onAssignMeal(day, slot)
+    A-->>C: re-render with new weeklyBudget + groceryList
+    end
+
+    rect rgb(255, 243, 224)
+    Note over U,C: Flow 4 — Cooked It! → diary entry + timesCooked +1
+    U->>C: submit Cooked It! form
+    C->>A: onCookedIt(note, mood)
+    A-->>V: new cookingLog entry appears
+    A-->>B: card shows updated timesCooked
+    end
+```
+
+### How each flow updates state (mechanism)
+
+The diagram above shows *who calls what*. The mechanism behind each flow:
+
+1. **Browser click → Detail updates** — clicking a card sets `selectedRecipeId`; `selectedRecipe` is derived from `recipes.find(r => r.id === selectedRecipeId)` each render.
+2. **Filter change → Browser shrinks** — Controller writes `filters`; `filteredRecipes` is derived from `recipes.filter(matchesFilters)` and passed to Browser as a prop.
+3. **Assign meal → Budget + Grocery recalculate** — Controller writes to `mealPlan`; `weeklyBudget` and `groceryList` are recomputed from `mealPlan` + `recipes` each render. No cached totals.
+4. **"Cooked It!" → diary entry + timesCooked +1** — App immutably maps over `recipes` and updates the one whose id matches `selectedRecipeId`, prepending to `cookingLog` and incrementing `timesCooked`.
 
 ## Tech
 
