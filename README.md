@@ -5,7 +5,7 @@ A weekly meal planner + cooking diary for solo-living young adults.
 
 🔗 **Live demo**: https://chanhwi-keyoh.github.io/Cookit-/
 📐 **Design Intent**: [design-intent.md](design-intent.md)
-🗺 **System diagrams (Mermaid)**: [Architecture](#architecture) · [State flows](#what-triggers-updates--the-4-state-flows)
+🗺 **System diagrams**: [Architecture (Mermaid)](#architecture) · [State flows (Mermaid)](#what-triggers-updates--the-4-state-flows) · [PNG: architecture](docs/diagrams/architecture.png) · [PNG: state flows](docs/diagrams/state-flows.png)
 📓 **AI Direction Log**: [docs/ai-direction-log.md](docs/ai-direction-log.md)
 ✋ **Records of Resistance**: [docs/records-of-resistance.md](docs/records-of-resistance.md)
 
@@ -42,6 +42,10 @@ flowchart TB
     B -.->|"onSelectRecipe(id)"| APP
     C -.->|"onFilterChange<br/>onAssignMeal<br/>onRemoveMeal<br/>onCookedIt"| APP
 ```
+
+📎 **Static PNG**: [docs/diagrams/architecture.png](docs/diagrams/architecture.png)
+
+![Architecture: state lives in App.jsx; three panels receive props and send callbacks back up](docs/diagrams/architecture.png)
 
 No child component holds its own copy of `selectedRecipeId`, `recipes`, `mealPlan`, or `filters`. Derived values are recomputed each render — never stored. See [src/App.jsx](src/App.jsx) for the four `useState` calls and the derivation logic.
 
@@ -85,6 +89,10 @@ sequenceDiagram
     A-->>B: card shows updated timesCooked
     end
 ```
+
+📎 **Static PNG**: [docs/diagrams/state-flows.png](docs/diagrams/state-flows.png)
+
+![Sequence diagram of the 4 state flows: card click, filter change, meal assignment, Cooked It!](docs/diagrams/state-flows.png)
 
 ### How each flow updates state (mechanism)
 
@@ -147,7 +155,7 @@ Yes. The [AI Direction Log](docs/ai-direction-log.md) records five real decision
 ## ESF Checklist
 
 - [x] Design Intent written — see [design-intent.md](design-intent.md)
-- [x] Mermaid diagrams in repo — [Architecture](#architecture) and [State flows](#what-triggers-updates--the-4-state-flows) (this README)
+- [x] Mermaid diagrams in repo — [Architecture](#architecture) and [State flows](#what-triggers-updates--the-4-state-flows) (this README); PNG copies in [docs/diagrams/](docs/diagrams/)
 - [x] AI Direction Log — 5 entries: [docs/ai-direction-log.md](docs/ai-direction-log.md)
 - [x] Records of Resistance — 4 entries: [docs/records-of-resistance.md](docs/records-of-resistance.md)
 - [x] Five Questions answered (this README)
