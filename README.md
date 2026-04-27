@@ -5,6 +5,7 @@ A weekly meal planner + cooking diary for solo-living young adults.
 
 🔗 **Live demo**: https://chanhwi-keyoh.github.io/Cookit-/
 📐 **Design Intent**: [design-intent.md](design-intent.md)
+🗺 **System diagrams (Mermaid)**: [Architecture](#architecture) · [State flows](#what-triggers-updates--the-4-state-flows)
 📓 **AI Direction Log**: [docs/ai-direction-log.md](docs/ai-direction-log.md)
 ✋ **Records of Resistance**: [docs/records-of-resistance.md](docs/records-of-resistance.md)
 
@@ -146,6 +147,7 @@ Yes. The [AI Direction Log](docs/ai-direction-log.md) records five real decision
 ## ESF Checklist
 
 - [x] Design Intent written — see [design-intent.md](design-intent.md)
+- [x] Mermaid diagrams in repo — [Architecture](#architecture) and [State flows](#what-triggers-updates--the-4-state-flows) (this README)
 - [x] AI Direction Log — 5 entries: [docs/ai-direction-log.md](docs/ai-direction-log.md)
 - [x] Records of Resistance — 4 entries: [docs/records-of-resistance.md](docs/records-of-resistance.md)
 - [x] Five Questions answered (this README)
