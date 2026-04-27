@@ -4,6 +4,7 @@ AI 201 — Project 2: The Reactive Sandbox
 A weekly meal planner + cooking diary for solo-living young adults.
 
 🔗 **Live demo**: https://chanhwi-keyoh.github.io/Cookit-/
+📐 **Design Intent**: [design-intent.md](design-intent.md)
 📓 **AI Direction Log**: [docs/ai-direction-log.md](docs/ai-direction-log.md)
 ✋ **Records of Resistance**: [docs/records-of-resistance.md](docs/records-of-resistance.md)
 
@@ -99,13 +100,13 @@ The single-source-of-truth check: open React DevTools on `App`. All four state a
 Yes. The elevator version: *"If two components need the same data, move the data to the nearest parent they share. The parent holds it with `useState`, passes it to the children as props, and the children ask for changes by calling functions the parent gave them."* In this app, that parent is `App`. The data flows one direction (down), the change requests flow the other direction (up). Nothing loops back on itself — that's why the app stays predictable.
 
 ### 5. Is my documentation honest?
-Yes. The [AI Direction Log](docs/ai-direction-log.md) records five real decisions I made during the build. The [Records of Resistance](docs/records-of-resistance.md) document three actual moments where I said "no" to what Claude produced — storing `filteredRecipes`, reaching for `useContext`, and styling before the wiring was proven. Neither document is a reconstruction; they describe the session as it happened.
+Yes. The [AI Direction Log](docs/ai-direction-log.md) records five real decisions I made during the build. The [Records of Resistance](docs/records-of-resistance.md) documents four actual moments where I said "no" to what Claude produced — storing `filteredRecipes`, reaching for `useContext`, styling before the wiring was proven, and a too-conservative grocery-list merge. Neither document is a reconstruction; they describe the session as it happened.
 
 ## ESF Checklist
 
-- [x] Design Intent written — see [../SCAD 2/design-intent.md](../../Documents/Claude/Projects/SCAD%202/design-intent.md)
+- [x] Design Intent written — see [design-intent.md](design-intent.md)
 - [x] AI Direction Log — 5 entries: [docs/ai-direction-log.md](docs/ai-direction-log.md)
-- [x] Records of Resistance — 3 entries: [docs/records-of-resistance.md](docs/records-of-resistance.md)
+- [x] Records of Resistance — 4 entries: [docs/records-of-resistance.md](docs/records-of-resistance.md)
 - [x] Five Questions answered (this README)
 - [x] Git commits before/after AI sessions
 
